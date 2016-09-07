@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.jd.si.kafkaMonitor.dao.MonitorDataDao">
+	
+	<insert id="insert" parameterType="com.jd.si.kafkaMonitor.model.MonitorData">
+		INSERT INTO km_monitor_data(pid,dateType,dataType,jsonData,indate) VALUES (#{pid},#{dateType},#{dataType},#{jsonData},now())
+	</insert>
+
+	<select id="getList" resultType="map" parameterType="map">
+		SELECT * FROM km_monitor_data
+		<where>
+			<if test="pid != null">
+				and pid=#{pid}
+			</if>
+			<if test="dateType != null">
+				and dateType=#{dateType}
+			</if>
+			<if test="dataType != null">
+				and dataType=#{dataType}
+			</if>
+			<if test="searchTime != null">
+				and indate BETWEEN #{searchTime} AND now()
+			</if>
+		</where>
+		order by indate asc
+	</select>
+
+</mapper>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.jd.si.kafkaMonitor.dao.ClusterDao">
+	
+	<select id="getList" resultType="map" parameterType="map">
+		SELECT * FROM km_cluster order by id desc
+	</select>
+
+	<select id="getByPk" resultType="com.jd.si.kafkaMonitor.model.Cluster" parameterType="int">
+		SELECT * FROM km_cluster where id=${value}
+	</select>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM km_cluster WHERE id=${value}
+	</delete>
+
+	<insert id ="insert" parameterType="com.jd.si.kafkaMonitor.model.Cluster" >
+		INSERT INTO km_cluster(cname,zkhost,cdesc) VALUES (#{cname},#{zkhost},#{cdesc})
+	</insert>
+
+</mapper>
+

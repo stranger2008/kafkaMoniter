@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.jd.si.kafkaMonitor.dao.JmxConfigDao">
+	
+	<select id="getList" resultType="map" parameterType="map">
+		SELECT * FROM km_jmx_config
+		<where>
+			<if test="cid != null">
+				and cid=#{cid}
+			</if>
+		</where>
+		order by cid desc,id desc
+	</select>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM km_jmx_config WHERE id=${value}
+	</delete>
+
+	<insert id ="insertBatch" parameterType="java.util.List" >
+		insert into km_jmx_config(cid,host,port) values
+		<foreach collection ="list" item="jmxConf" index= "index" separator =",">
+			(#{jmxConf.cid},#{jmxConf.host}, #{jmxConf.port})
+		</foreach>
+	</insert>
+
+</mapper>
+

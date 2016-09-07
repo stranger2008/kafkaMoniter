@@ -1,0 +1,7 @@
+body {margin:0;padding: 0px;font-size: 14px;font-family: "宋体";color:#4f4f4f;}
+input,select{margin:5px 0;}
+#serverListMgr{
+    padding:10px;
+    background-color:white;
+    border:1px solid #cecece;
+}

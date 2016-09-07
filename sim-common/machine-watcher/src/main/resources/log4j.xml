@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <!-- 控制台 -->
+    <appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%15t] [%30.30C{1}] [%3L] %6p - %m %n" />
+            <!-- param name="ConversionPattern" value="%d [%20t] [%7r] [%45C{1}] [%25M] [%3L] %6p - %30.30c - %m %n" / -->
+        </layout>
+    </appender>
+
+    <!-- 全日志 -->
+    <!--<appender name="allLog" class="org.apache.log4j.DailyRollingFileAppender">-->
+        <!--<param name="File" value="/export/Logs/user_model_server/all.log" />-->
+        <!--<param name="Append" value="true" />-->
+        <!--<param name="DatePattern" value="'_'yyyy-MM-dd'.log'" />-->
+        <!--<layout class="org.apache.log4j.PatternLayout">-->
+            <!--<param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %p - %m |||| %l%n" />-->
+        <!--</layout>-->
+    <!--</appender>-->
+    <appender name="allLog" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="/export/Logs/machine-watcher/all.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="1GB"/><!--后缀可以是KB, MB 或者是 GB. 在日志文件到达该大小时，将会自动滚动-->
+        <param name="MaxBackupIndex" value="5"/><!--指定可以产生的滚动文件的最大数-->
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%30.30C{1}] [%3L] %6p - %m %n"/>
+        </layout>
+    </appender>
+
+    <root>
+        <priority value="ERROR" />
+        <!--<appender-ref ref="stdout" />-->
+        <appender-ref ref="allLog" />
+    </root>
+</log4j:configuration>
